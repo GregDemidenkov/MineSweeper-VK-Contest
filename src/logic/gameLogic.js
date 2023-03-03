@@ -2,7 +2,6 @@ import { CODES } from 'constants/gameSettings'
 
 
 export const initBoard = (width, height, mineCount, yClick, xClick) => {
-	// console.log(width, height, mineCount, xClick, yClick)
 	const boardSize = Array(width * height).fill(0).map((_, i) => i)
 	const shuffle = []
 	const boardData = []
@@ -21,10 +20,8 @@ export const initBoard = (width, height, mineCount, yClick, xClick) => {
 		const x = shuffle[i] % width
 		const y = Math.floor(shuffle[i] / width)
 		if(x === xClick && y === yClick) {
-			console.log(i)
 			shuffle[i] = boardSize.splice(Math.floor(Math.random() * boardSize.length), 1)[0]
 			i--
-			console.log(i)
 		} else boardData[y][x] = CODES.MINE
 	}
  
