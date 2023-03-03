@@ -29,7 +29,7 @@ export const GamePanelContainer = () => {
 
 	return (
 		<GamePanel
-			mineCount = {mineCount - flagCount}
+			mineCount = {(mineCount - flagCount).toString().padStart(3, '0')}
 			timer = {timer.toString().padStart(3, '0')}
 			onClickRestart = {() => onClickRestart()}
 		/>

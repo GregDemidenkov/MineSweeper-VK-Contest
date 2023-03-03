@@ -12,7 +12,7 @@ const initialState = {
 	gameStatus: GAME.READY,
 	timerStatus: false,
 	timer: 0,
-	boardData: initBoard(WIDTH, HEIGHT, MINES),
+	boardData: initBoard(WIDTH, HEIGHT, 0),
 	flagCount: 0,
 	openedCellCount: 0,
     mineExploded: [null, null],
@@ -32,10 +32,11 @@ const gameDataSlice = createSlice({
             state.gameStatus = GAME.READY
             state.timerStatus = false
             state.timer = 0
-            state.boardData = initBoard(state.width, state.height, state.mineCount)
+            state.boardData = initBoard(state.width, state.height, 0)
             state.flagCount = 0
             state.openedCellCount = 0
             state.mineExploded = [null, null]
+            state.isPressedCell = false
         },
         updateTimer(state) {
             if(state.timer === 999) {
@@ -44,10 +45,14 @@ const gameDataSlice = createSlice({
             } else state.timer++
         },
         openCell(state, action) {
+            if (!state.timerStatus) {
+                state.timerStatus = true
+                console.log(1)
+                state.boardData = initBoard(state.width, state.height, MINES, action.payload.y, action.payload.x)
+            }
+
             const code = state.boardData[action.payload.y][action.payload.x]
             state.gameStatus = GAME.RUN
-
-            if (!state.timerStatus) state.timerStatus = true
 
             if (code === CODES.MINE) {
                 state.gameStatus = GAME.LOSE

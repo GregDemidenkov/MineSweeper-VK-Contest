@@ -16,9 +16,9 @@ export const GamePanel = ({mineCount, timer, onClickRestart}) => {
 	return (
 		<Wrapper>
 			<Mine>
-				<Num num = {0} />
 				<Num num = {mineNums[0]} />
 				<Num num = {mineNums[1]} />
+				<Num num = {mineNums[2]} />
 			</Mine>
 			<RestartButton 
 				gameStatus = {gameStatus} 
