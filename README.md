@@ -1,6 +1,6 @@
 # MINESWEEPER VK CONTEST
 
-Play now: mine-sweeper-vk-contest.vercel.app
+Play now: [mine-sweeper-vk-contest.vercel.app](mine-sweeper-vk-contest.vercel.app)
 
 ## Getting Started with Create React App
 
