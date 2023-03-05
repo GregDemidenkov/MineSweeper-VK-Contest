@@ -5,7 +5,7 @@ import { openCell, rotateCellState } from 'redux/gameDataSlice'
 
 import { GAME } from 'constants/gameSettings'
 
-import { Cell } from 'components/cell/Cell'
+import { Cell } from 'components/Cell'
 
 
 export const CellContainer = ({x, y}) => {

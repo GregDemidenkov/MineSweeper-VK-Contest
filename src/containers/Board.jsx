@@ -2,7 +2,7 @@ import React from 'react';
 
 import { useSelector } from 'react-redux';
 
-import { Board } from 'components/board/Board';
+import { Board } from 'components/Board';
 
 
 export const BoardContainer = () => {

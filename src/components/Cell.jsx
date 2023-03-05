@@ -1,10 +1,36 @@
-import styled from 'styled-components';
+import React from 'react'
 
-import { CODES, GAME } from 'constants/gameSettings';
+import { useSelector, useDispatch } from 'react-redux'
+import { setPressedCell } from 'redux/gameDataSlice'
+
+import styled from 'styled-components'
+
+import { CODES, GAME } from 'constants/gameSettings'
 
 import sprite from 'assets/sprite.png'
 
-export const Button = styled.button`
+
+export const Cell = ({coordinate, cellCode, onClickCell, onRightClickCell}) => {
+
+	const dispatch = useDispatch()
+	const { gameStatus, mineExploded, isPressedCell } = useSelector(state => state.gameDataState)
+
+	return (
+		<Button 
+			gameStatus = {gameStatus}
+			mineExploded = {mineExploded}
+			coordinate = {coordinate}
+			cellCode = {cellCode} 
+			onClick = {() => onClickCell()}
+			onContextMenu = {() => onRightClickCell()}
+			onMouseDown = {() => dispatch(setPressedCell(isPressedCell))}
+			onMouseUp = {() => dispatch(setPressedCell(isPressedCell))} 
+		/>
+	);
+};
+
+
+const Button = styled.button`
 	background-color: #c2c2c2;
 	width: 16px;
 	height: 16px;
@@ -123,4 +149,4 @@ export const Button = styled.button`
 			` 
 		}
 	}};
-`;
+`

@@ -1,11 +1,44 @@
-import styled from 'styled-components';
+import React from 'react'
+
+import { useSelector } from 'react-redux'
+
+import styled from 'styled-components'
 
 import sprite from 'assets/sprite.png'
 
-import { GAME } from 'constants/gameSettings';
+import { GAME } from 'constants/gameSettings'
 
 
-export const Wrapper = styled.div`
+export const GamePanel = ({mineCount, timer, onClickRestart}) => {
+
+	const { gameStatus, isPressedCell } = useSelector(state => state.gameDataState)
+
+	const mineNums = String(mineCount).split('').map(el => Number(el))
+	const timerNums = String(timer).split('').map(el => Number(el))
+
+	return (
+		<Wrapper>
+			<Mine>
+				<Num num = {mineNums[0]} />
+				<Num num = {mineNums[1]} />
+				<Num num = {mineNums[2]} />
+			</Mine>
+			<RestartButton 
+				gameStatus = {gameStatus} 
+				isPressedCell = {isPressedCell}
+				onClick = {onClickRestart}
+			/>
+			<Timer>
+				<Num num = {timerNums[0]} />
+				<Num num = {timerNums[1]} />
+				<Num num = {timerNums[2]} />
+			</Timer>
+		</Wrapper>
+	);
+};
+
+
+const Wrapper = styled.div`
 	display: flex;
 	justify-content: space-between;
 	width: 244px;
@@ -17,13 +50,13 @@ export const Wrapper = styled.div`
 	border-style: solid;
 	border-top-color: #7b7b7b;
 	border-width: 2px;
-`;
+`
 
-export const Mine = styled.div`
+const Mine = styled.div`
 	display: flex;
-`;
+`
 
-export const Num = styled.div`
+const Num = styled.div`
 	width: 13px;
 	height: 23px;
 
@@ -90,9 +123,9 @@ export const Num = styled.div`
 			` ;
 		}
 	}};
-`;
+`
 
-export const RestartButton = styled.span`
+const RestartButton = styled.span`
 	width: 26px;
 	height: 26px;
 	cursor: pointer;
@@ -129,8 +162,8 @@ export const RestartButton = styled.span`
 		background-image: url(${sprite});
 		background-position: -27px -24px;
 	}
-`;
+`
 
-export const Timer = styled.div`
+const Timer = styled.div`
 	display: flex;
-`;
+`

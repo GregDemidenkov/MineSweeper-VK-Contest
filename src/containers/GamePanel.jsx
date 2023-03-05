@@ -3,7 +3,7 @@ import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux'
 import { restartGame, updateTimer } from 'redux/gameDataSlice'
 
-import { GamePanel } from 'components/gamePanel/GanePanel'
+import { GamePanel } from 'components/GanePanel'
 
 
 export const GamePanelContainer = () => {

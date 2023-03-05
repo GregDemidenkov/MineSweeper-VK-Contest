@@ -47,12 +47,14 @@ const gameDataSlice = createSlice({
         openCell(state, action) {
             if (!state.timerStatus) {
                 state.timerStatus = true
-                console.log(1)
                 state.boardData = initBoard(state.width, state.height, MINES, action.payload.y, action.payload.x)
+                state.flagCount = 0
+                state.openedCellCount = 0
             }
 
-            const code = state.boardData[action.payload.y][action.payload.x]
             state.gameStatus = GAME.RUN
+
+            const code = state.boardData[action.payload.y][action.payload.x]
 
             if (code === CODES.MINE) {
                 state.gameStatus = GAME.LOSE
@@ -74,8 +76,9 @@ const gameDataSlice = createSlice({
             const code = state.boardData[action.payload.y][action.payload.x]
 
             if (code !== CODES.OPENED && code < 0) {
-                state.boardData[action.payload.y][action.payload.x] = getCellCode(code)
+                if (state.flagCount === 40 && (getCellCode(code) === CODES.FLAG || getCellCode(code) === CODES.MINE_FLAG || getCellCode(code) === CODES.MISS_FLAG)) return
                 state.flagCount += getFlag(code)
+                state.boardData[action.payload.y][action.payload.x] = getCellCode(code)
             }
         },
         setPressedCell(state, action) {
